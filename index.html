@@ -1,1 +1,107 @@
-<html><body><h1>PKS Notes</h1></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PKS IAS Notes</title>
+  <style>
+    :root {
+      --bg: #121212;
+      --fg: #e0e0e0;
+      --accent: #00ff99;
+      --accent2: #33ccff;
+      --card-bg: #1f1f1f;
+      --hover-bg: #272727;
+    }
+    body {
+      margin: 0;
+      font-family: “Segoe UI”, Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg);
+      color: var(--fg);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      padding: 2rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      color: var(--accent);
+    }
+    header p {
+      margin-top: 0.5rem;
+      color: var(--accent2);
+    }
+    main {
+      flex: 1;
+      width: 90%;
+      max-width: 900px;
+      margin: auto;
+    }
+    .bio {
+      margin: 2rem 0;
+      padding: 1rem;
+      background: var(--card-bg);
+      border-radius: 8px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 1rem;
+      border-radius: 6px;
+      transition: background-color 0.2s;
+    }
+    .card a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: 1.1rem;
+    }
+    .card:hover {
+      background: var(--hover-bg);
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: var(--card-bg);
+    }
+    footer a {
+      color: var(--accent2);
+      text-decoration: none;
+      margin: 0 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>PKS IAS Notes</h1>
+    <p>Exploring & Documenting My Cybersecurity Learning Journey</p>
+  </header>
+  <main>
+    <section class="bio">
+      <p>
+        Hi — I’m on a journey through web security, penetration testing, and ethical hacking.  
+        These are my notes, experiments, and writeups as I learn and grow in cybersecurity.
+      </p>
+    </section>
+    <section class="cards">
+      <div class="card"><a href="Notes/01_fundamentals.html">01. Fundamentals</a></div>
+      <div class="card"><a href="Notes/02_pen_test_lifecycle.html">02. Pen Test Lifecycle</a></div>
+      <div class="card"><a href="Notes/04_tools_and_env.html">04. Tools & Environment</a></div>
+      <div class="card"><a href="Notes/05_dvwa_lessons.html">05. DVWA Hands-on Lessons</a></div>
+      <div class="card"><a href="Notes/06_resources.html">06. Resources</a></div>
+      <!-- Add more cards/links here if you have more note pages -->
+    </section>
+  </main>
+  <footer>
+    <p>
+      <a href="https://github.com/al-aminabdul-ship-it/PKS-SITE/blob/main/index.html">GitHub Repo</a>
+    </p>
+  </footer>
+</body>
+</html>
